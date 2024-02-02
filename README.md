@@ -1,1 +1,1 @@
-# CreatorCredentials.com
+# Creator Credentials
