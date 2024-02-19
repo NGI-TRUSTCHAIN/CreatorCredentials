@@ -22,7 +22,7 @@ Creator Credentials aims to establish a new role for public entities and organis
 
 <div data-full-width="true">
 
-<figure><img src="https://github.com/CreatorCredentials/docs/blob/main/.gitbook/assets/Creator-Credentials-Overview.png" alt=""><figcaption><p>Creator Credentials – Overview</p></figcaption></figure>
+<figure><img src="https://github.com/CreatorCredentials/docs/blob/main/.gitbook/assets/Creator-Credentials-Overview.png" alt=""></figure>
 
 </div>
 
