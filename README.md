@@ -22,7 +22,7 @@ Creator Credentials aims to establish a new role for public entities and organis
 
 ## Documentation
 
-In the coming weeks we will continue to work on the documentation: [https://docs.creatorcredentials.com](https://docs.creatorcredentials.com)
+You can read the documentation here: [https://docs.creatorcredentials.com](https://docs.creatorcredentials.com)
 
 ## Overview
 
@@ -44,12 +44,10 @@ If you have any questions, please feel free to reach out:
 Sebastian Posth [https://github.com/sposth](https://github.com/sposth)  
 Liccium B.V. [https://liccium.com/](https://liccium.com/)
 
----
 <img src="https://github.com/CreatorCredentials/.github/assets/14913025/f53962c2-7c4c-4312-a0b2-1485de3e60e5" width="250"/>
 
 The development work and innovation process has been funded by European Union’s Horizon 2020 research and innovation programme under grant agreement No. 101093274
 
 [https://trustchain.ngi.eu/creatorcredentials](https://trustchain.ngi.eu/creatorcredentials)
 
----
 
