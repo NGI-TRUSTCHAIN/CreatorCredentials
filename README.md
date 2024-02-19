@@ -31,7 +31,7 @@ Posth Werk [https://posth.me/](https://posth.me/)
 
 The development work and innovation process has been funded by European Union’s Horizon 2020 research and innovation programme under grant agreement No. 101093274
 
-[https://trustchain.ngi.eu/creatorcredentials-cc/](https://trustchain.ngi.eu/creatorcredentials-cc/)
+[https://trustchain.ngi.eu/creatorcredentials](https://trustchain.ngi.eu/creatorcredentials)
 
 ---
 
