@@ -1,7 +1,5 @@
 # Introduction to Creator Credentials 👋  
 
-# The Project
-
 <img src="https://github.com/CreatorCredentials/docs/blob/main/.gitbook/assets/CC%20logo-text.png" width="200"/>
 
 ## Motivation
