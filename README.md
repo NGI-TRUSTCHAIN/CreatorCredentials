@@ -20,6 +20,12 @@ This includes a software application that can be used by media organisations, me
 
 Creator Credentials aims to establish a new role for public entities and organisations in digital media publishing. By extending the state-of-the-art in digital identities to the cultural and creative communities and solving existing real-world problems, the project aims to provide new and highly innovative software solutions for credential issuers and future trust services.
 
+## Documentation
+
+In the coming weeks we will continue to work on the documentation: [https://docs.creatorcredentials.com](https://docs.creatorcredentials.com)
+
+## Overview
+
 <div data-full-width="true">
 
 <figure><img src="https://github.com/CreatorCredentials/docs/blob/main/.gitbook/assets/Creator-Credentials-Overview.png" alt=""></figure>
