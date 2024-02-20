@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-background;
+}
+
+#__next {
+  @apply h-screen;
+}
+
+@layer base {
+  body {
+    @apply min-w-[1280px];
+  }
+
+  html {
+    @media (min-width: 128px) {
+      font-size: clamp(1rem, 0.625vw + 0.5rem, 2rem);
+    }
+  }
+}
+
+.anchor__button--disabled {
+  @apply cursor-not-allowed bg-grey-3 border-grey-3 pointer-events-none;
+}

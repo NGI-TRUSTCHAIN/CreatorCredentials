@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Discovery information",
+  "description": "The schema defines a data model for the discovery.json",
+  "type": "object",
+  "required": ["version", "lastUpdated", "knownHosts", "issuers"],
+  "properties": {
+    "version": {
+      "title": "JSON Schema version",
+      "description": "Version is an incremental integer starting with 1",
+      "type": "integer",
+      "minimum": 1
+    },
+    "lastUpdated": {
+      "title": "Last updated",
+      "description": "Date and time of the last update",
+      "type": "string",
+      "format": "date-time"
+    },
+    "knownHosts": {
+      "title": "Known Hosts",
+      "description": "DIDs of the known CC app hosts.",
+      "type": "array",
+      "items": {
+        "title": "Host's DID or URL to the .well-known where the 'discovery.json' can be found",
+        "type": "string",
+        "format": "uri"
+      }
+    },
+    "issuers": {
+      "title": "Onboarded issuers",
+      "description": "DIDs of the issuers onboarded to this platform",
+      "type": "array",
+      "items": {
+        "title": "Issuer's DID",
+        "type": "string",
+        "format": "uri"
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "issuer": {
+    "fees": "Fees may apply",
+    "request-button": "Request credentials"
+  },
+  "credential": {
+    "types": {
+      "email": {
+        "title": "E-Mail",
+        "description": "Verified e-mail address",
+        "requirements": "Info about requirements"
+      },
+      "wallet": {
+        "title": "Wallet",
+        "description": "Verified wallet",
+        "requirements": "Info about requirements"
+      },
+      "member": {
+        "title": "Member",
+        "description": "This credential attests that you are a member of the issuer organisation",
+        "requirements": "Info about requirements"
+      }
+    }
+  }
+}

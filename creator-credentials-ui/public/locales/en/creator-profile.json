@@ -1,0 +1,31 @@
+{
+  "header": {
+    "title": "Your Profile"
+  },
+  "personal-data": {
+    "title": "Your personal data",
+    "fields": {
+      "e-mail": {
+        "label": "Your e-mail address"
+      }
+    }
+  },
+  "legal-documents": {
+    "title": "Legal documents"
+  },
+  "privacy": {
+    "title": "Privacy",
+    "credential-visibility": {
+      "title": "Credential visibility",
+      "fields": {
+        "show-all": "Show all",
+        "e-mail": "E-Mail",
+        "wallet": "Wallet",
+        "domain": "Domain"
+      },
+      "errors": {
+        "save-settings": "Could not save credential visibility settings. Please try again later."
+      }
+    }
+  }
+}

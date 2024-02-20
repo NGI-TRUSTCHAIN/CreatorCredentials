@@ -1,0 +1,26 @@
+{
+  "@context": [
+    "https://www.w3.org/ns/did/v1",
+    "https://w3id.org/security/suites/jws-2020/v1"
+  ],
+  "id": "did:web:creatorcredentials.dev",
+  "verificationMethod": [
+    {
+      "id": "did:web:creatorcredentials.dev#0",
+      "type": "JsonWebKey2020",
+      "controller": "did:web:creatorcredentials.dev",
+      "publicKeyJwk": {
+        "kty": "EC",
+        "crv": "P-256",
+        "x": "2fzVoANfxewRN-riGfw3Fxz8yizeucRTnRJICuBAoPE",
+        "y": "8RmPZkAOYD-DwdGH9qfUox7jKSlAawU41EFOopqGwQQ"
+      }
+    }
+  ],
+  "authentication": [
+    "did:web:creatorcredentials.dev#0"
+  ],
+  "assertionMethod": [
+    "did:web:creatorcredentials.dev#0"
+  ]
+}

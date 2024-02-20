@@ -1,0 +1,21 @@
+{
+  "header": {
+    "title": "Welcome to the Creator Hub"
+  },
+  "welcome": {
+    "title": "Start managing your digital creator identity",
+    "subtitle": "Navigating the digital landscape as a creator has never been more seamless. Our application acts as a bridge, connecting you to trusted credential issuers and services, ensuring your content and identity remain authentic in the vast world of digital media. With the Creator Credentials app, you can request, manage, and verify your digital credentials with ease, reinforcing trust in every declarations and attribution."
+  },
+  "select-issuer": {
+    "title": "Connect to your trust service",
+    "subtitle": "Here, you can link up with recognized credential issuers in the industry. These institutions and organizations are the bedrock of the digital attribution process, ensuring your credentials are verifiable and legitimate."
+  },
+  "add-credential": {
+    "title": "Request new credential",
+    "subtitle": "Initiate the process of acquiring verifiable credentials for your creative works. Make sure to establish a connection with an issuer first. With these credentials, your content is not only safeguarded but also certified, granting it the recognition it deserves."
+  },
+  "verify-wallet": {
+    "title": "Verify your wallet",
+    "subtitle": "This step will proof that you control the wallet that you use to make public content declarations. "
+  }
+}

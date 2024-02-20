@@ -1,0 +1,24 @@
+{
+  "header": {
+    "title": "Issuer Portal"
+  },
+  "welcome-card": {
+    "title": "Welcome to your dashboard",
+    "content": "Welcome, Issuer! Here, you'll find tools and resources that enable you to establish trust in the digital creative space. As a trust service provider, you can approve connection requests from creators and issue verifiable creator credentials, ensuring authenticity and credibility in the creative domain."
+  },
+  "verify-domain": {
+    "title": "Verify domain",
+    "content": "Establish your authority by verifying control over your domain. This process ensures a secure and trusted environment for both issuers and creators."
+  },
+  "did-web": {
+    "title": "Set-up did:web",
+    "content": "By setting up did:web, you're enhancing the security and reliability of the credentials you issue"
+  },
+  "qualified-certificates": {
+    "title": "Qualified certificates",
+    "qcert": {
+      "title": "Verify QCert for eSeal",
+      "content": "Verifying your QCert for eSeal adds an extra layer of trust, indicating that the credentials come from a verified and legitimate source."
+    }
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "login": "Login",
+  "log-in": "Log in",
+  "send": "Send",
+  "email": "e-mail",
+  "select": "Select",
+  "add": "Add",
+  "start": "Start",
+  "next": "Next",
+  "back": "Back",
+  "go-back": "Go back",
+  "sign-up": "Sign up",
+  "resend-email": "Resend e-mail",
+  "verified": "Verified",
+  "connected": "Connected",
+  "disconnect": "Disconnect",
+  "verify": "Verify",
+  "coming-soon": "Coming soon",
+  "pending": "Pending",
+  "connect": "Connect",
+  "confirm": "Confirm",
+  "download": "Download",
+  "deselect": "Deselect",
+  "active": "Active",
+  "accept": "Accept",
+  "reject": "Reject",
+  "accepted": "Accepted",
+  "close": "Close",
+  "selected": "Selected",
+  "navigation": {
+    "home": "Home Page",
+    "verification": "Verification",
+    "creators": "Creators",
+    "issuers": "Issuers",
+    "credentials": "Credentials",
+    "profile": "Profile",
+    "signout": "Sign-out",
+    "requested": "Requested",
+    "accepted": "Accepted"
+  },
+  "badges": {
+    "verification": "Verification",
+    "credential": "Credential",
+    "creator": "Creator",
+    "issuer": "Issuer"
+  },
+  "copy-to-clipboard": {
+    "label": "Copy to clipboard",
+    "info": "Copied to clipboard",
+    "error": "Failed to copy to clipboard",
+    "warning": "Your browser does not support copying to clipboard"
+  },
+  "sorting": {
+    "label": "Sorting",
+    "items": {
+      "a-z": "A-Z",
+      "z-a": "Z-A",
+      "last-date": "Last date",
+      "newest-date": "Newest date"
+    }
+  }
+}

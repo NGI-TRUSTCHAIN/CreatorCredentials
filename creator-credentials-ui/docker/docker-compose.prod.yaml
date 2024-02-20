@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  prod-creator-credentials-ui:
+    container_name: prod-creator-credentials-ui
+    image: prod-creator-credentials-ui
+    build:
+      dockerfile: ./docker/Dockerfile.prod
+      context: ../
+      target: runner
+    environment:
+      API_MOCKING: ${API_MOCKING}
+      DEBUG_I18N: ${DEBUG_I18N}
+      API_URL: ${API_URL}
+      FRONTEND_APP_PORT: ${FRONTEND_APP_PORT}
+      NEXTAUTH_URL: ${NEXTAUTH_URL}
+      NEXTAUTH_URL_INTERNAL: ${NEXTAUTH_URL_INTERNAL}
+      NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
+      CLERK_SECRET_KEY: ${CLERK_SECRET_KEY}
+      NEST_API_URL: ${NEST_API_URL}
+      NEST_API_SSR_URL: ${NEST_API_SSR_URL}
+      DISABLE_I18N_TRANSLATIONS: ${DISABLE_I18N_TRANSLATIONS}
+    ports:
+      - ${FRONTEND_APP_PORT}:${FRONTEND_APP_PORT}

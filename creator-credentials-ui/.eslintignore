@@ -1,0 +1,19 @@
+# Dependency
+node_modules
+pnpm-lock.yaml
+.pnpm-store
+
+# Build
+out
+.next
+
+# VSCode
+.vscode
+
+# Log
+*.log
+
+# Test
+coverage
+test/test-result
+coverage-summary

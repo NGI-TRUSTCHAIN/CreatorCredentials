@@ -1,0 +1,37 @@
+{
+  "header": {
+    "title": "Domain verification",
+    "description": "With the following process you proof control over your web domain. This verification process will require to include data to your TXT record of your web domain to you proof that you have control about the domain."
+  },
+  "cards": {
+    "enter-domain": {
+      "title": "Enter domain",
+      "fields": {
+        "domain": {
+          "label": "Provide your web domain",
+          "placeholder": "testcreator.com"
+        }
+      },
+      "button": "Create record"
+    },
+    "update-txt-record": {
+      "title": "Update your TXT record",
+      "description": "Update your domain's DNS settings. Copy the record provided below and paste it into the TXT record of your DNS settings as the value.",
+      "fields": {
+        "txt-record": {
+          "label": "TXT record"
+        }
+      },
+      "button": "Confirm update"
+    },
+    "dns-record-verification": {
+      "title": "DNS record verification",
+      "description": "Verification of the DNS TXT record for your domain is in progress. Due to DNS propagation, this may take a few minutes. Thank you for your understanding as the verification process concludes. You may close the process and leave this page.",
+      "button": "Close"
+    }
+  },
+  "errors": {
+    "txt-record-creation": "Could not create TXT record. Please try again later.",
+    "txt-record-update": "Could not confirm TXT record update. Please try again later."
+  }
+}

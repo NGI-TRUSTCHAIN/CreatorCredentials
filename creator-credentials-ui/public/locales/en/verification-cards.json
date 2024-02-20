@@ -1,0 +1,32 @@
+{
+  "e-mail": {
+    "title": "E-mail verification",
+    "buttons": {
+      "show-details": "See credential details"
+    }
+  },
+  "metamask": {
+    "title": "Metamask",
+    "description": "Connect your Metamask wallet to digitally sign your declarations of original content.",
+    "buttons": {
+      "connect": "Connect wallet",
+      "disconnect": "Disconnect"
+    }
+  },
+  "domain": {
+    "title": "Domain verification",
+    "description": "Confirming your website ownership will reinforce trust in your content declarations.",
+    "buttons": {
+      "start-verification": "Start verification",
+      "disconnect": "Disconnect"
+    }
+  },
+  "did-web": {
+    "title": "did:web verification",
+    "description": "Confirming your website ownership will reinforce trust in your content declarations.",
+    "buttons": {
+      "start-verification": "Start verification",
+      "disconnect": "Disconnect"
+    }
+  }
+}

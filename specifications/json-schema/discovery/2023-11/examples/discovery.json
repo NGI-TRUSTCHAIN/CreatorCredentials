@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "lastUpdated": "2023-11-05T10:00:00Z",
+  "knownHosts": [
+    "did:web:alice.com",
+    "did:web:bob.com"
+  ],
+  "issuers": [
+    "did:web:charlie.com",
+    "did:web:eve"
+  ]
+}

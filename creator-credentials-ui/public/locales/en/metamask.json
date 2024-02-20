@@ -1,0 +1,7 @@
+{
+  "sign-message": "Welcome to Creator Credentials app!\n\nClick to sign-in and accept the Terms of Service ({{termsAndConditionsUrl}}).\n\nThis request will not trigger a blockchain transaction or cost any gas fees.\n\nYour wallet address:\n{{walletAddress}}\n\nNonce:\n{{nonce}}",
+  "errors": {
+    "connection-failed": "Failed to connect with MetaMask",
+    "disconnection-failed": "Failed to disconnect MetaMask wallet"
+  }
+}

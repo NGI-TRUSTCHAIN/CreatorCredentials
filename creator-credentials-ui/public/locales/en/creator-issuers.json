@@ -1,0 +1,13 @@
+{
+  "header": {
+    "title": "Your issuers",
+    "description": "Browse through our organized list of connected, pending, and available issuers. Initiate the collaboration process with new issuers or request credentials from those you're already connected with."
+  },
+  "tabs": {
+    "connected": "Connected",
+    "pending": "Pending",
+    "available": "Available"
+  },
+  "list-of-available": "List of available issuers.",
+  "list-of-additional": "List of additional issuers, that may require additional levels of verification to connect."
+}

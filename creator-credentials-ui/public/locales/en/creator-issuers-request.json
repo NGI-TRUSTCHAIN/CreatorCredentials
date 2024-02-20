@@ -1,0 +1,15 @@
+{
+  "header": {
+    "title": "Your connection request"
+  },
+  "card": {
+    "title": "You're about to establish a connection with the issuer below.",
+    "credentials-description": "These credentials will be presented to the chosen issuer for verification purposes.",
+    "confirmation-description": "By hitting \"confirm\", the issuer will be notified of your connection request."
+  },
+  "errors": {
+    "fetching-credentials": "There was an error fetching your credentials. Please try again later.",
+    "connection-request": "There was an error sending your connection request. Please try again later.",
+    "issuer-details": "There was an error loading the issuer details. Please try again later."
+  }
+}

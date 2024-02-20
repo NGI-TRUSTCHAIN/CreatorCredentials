@@ -1,0 +1,4 @@
+{
+  "*": ["prettier -c"],
+  "./src/**/*.{ts,tsx,js}": ["eslint --max-warnings=0"]
+}

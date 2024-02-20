@@ -1,0 +1,48 @@
+# Dependency
+node_modules
+pnpm-lock.yaml
+
+# Build
+out
+.next
+
+# VSCode
+.vscode
+
+# Log
+*.log
+
+# Test
+coverage
+test/test-result
+coverage-summary
+
+# Unsupported extensions
+*.txt
+*.md
+
+*.ico
+*.png
+*.jpg
+*.svg
+*.sh
+*.ttf
+
+# Unsupported files
+.browserslistrc
+.dockerignore
+.editorconfig
+.eslintignore
+.gitignore
+.husky
+.npmrc
+.nvmrc
+.prettierignore
+LICENSE
+
+.env*
+Dockerfile*
+
+# Ignored files
+.changeset/changelog.generator.js
+public/mockServiceWorker.js

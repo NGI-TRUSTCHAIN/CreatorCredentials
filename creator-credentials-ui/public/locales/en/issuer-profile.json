@@ -1,0 +1,34 @@
+{
+  "header": {
+    "title": "Profile",
+    "description": "These are your basic profile settings."
+  },
+  "data": {
+    "title": "Your data",
+    "fields": {
+      "domain": {
+        "label": "Domain name"
+      },
+      "company-name": {
+        "label": "Company name"
+      },
+      "email": {
+        "label": "Your e-mail address"
+      }
+    }
+  },
+  "description": {
+    "title": "Description",
+    "fields": {
+      "description": {
+        "label": "Description (max 30)"
+      }
+    }
+  },
+  "legal-documents": {
+    "title": "Legal documents"
+  },
+  "errors": {
+    "fetching-profile": "Could not fetch profile settings. Please try again later."
+  }
+}

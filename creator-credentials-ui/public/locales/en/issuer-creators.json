@@ -1,0 +1,26 @@
+{
+  "requested": {
+    "header": {
+      "title": "Creator requests",
+      "description": "This is a list of creators waiting for approval of their connection request. "
+    },
+    "errors": {
+      "accept-failed": "Failed to accept request. Please try again later.",
+      "reject-failed": "Failed to reject request. Please try again later."
+    }
+  },
+  "accepted": {
+    "header": {
+      "title": "Accepted creators",
+      "description": "This is a list of creators, you approved in the past."
+    }
+  },
+  "filters": {
+    "search": {
+      "placeholder": "Search by name, domain, or e-mail"
+    },
+    "period": {
+      "placeholder": "Select acceptance time period"
+    }
+  }
+}

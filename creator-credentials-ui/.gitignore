@@ -1,0 +1,31 @@
+# Dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# Environment variables
+.env*
+.env.dev
+
+# IDE
+.vscode/settings.json
+.idea
+
+# NextJS
+/.next/
+/out/
+
+# Production
+/build
+
+# Typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# Misc
+pnpm-debug.log*
+.DS_Store
+*.pem
+
+# Testing
+/coverage

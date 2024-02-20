@@ -1,0 +1,43 @@
+{
+  "header": {
+    "title": "did:web set-up",
+    "description": "Follow this guide to verify ownership of your web domain. This verification involves adding a file to the .well-known directory of your domain, confirming your control over it."
+  },
+  "cards": {
+    "domain": {
+      "title": "Set-up did:web",
+      "fields": {
+        "domain": {
+          "label": "Provide your web domain",
+          "placeholder": "testcreator.com"
+        }
+      },
+      "button": "Create file"
+    },
+    "json-file": {
+      "title": "Upload your did.json file",
+      "steps": {
+        "title": "Follow these steps carefully to ensure a successful verification.",
+        "1": "Locate the .well-known folder of your domain. In case it is not yet available, create a new folder with the following name: .well-known",
+        "2": "Download the did.json file.",
+        "3": "Upload the did.json file to the .well-know folder of your domain."
+      },
+      "file-content": {
+        "title": "File content for did.json"
+      },
+      "buttons": {
+        "download": "Download",
+        "confirm-upload": "Confirm upload"
+      }
+    },
+    "verification": {
+      "title": "did verification",
+      "description": "We will now verify the did.json file in your .well-known folder of your domain. DNS propagation can vary in time. Please allow a few minutes for the verification process to detect your changes.\nYou may close the process and leave this page."
+    }
+  },
+  "errors": {
+    "upload-confirmation": "Could not confirm upload. Please try again later.",
+    "json-file-creation": "Could not create file. Please try again later.",
+    "download-file": "Could not download file. Please try again later."
+  }
+}

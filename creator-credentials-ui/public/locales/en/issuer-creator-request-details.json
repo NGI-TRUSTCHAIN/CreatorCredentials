@@ -1,0 +1,11 @@
+{
+  "header": {
+    "title": "Creator details page"
+  },
+  "credentials": {
+    "title": "Credentials"
+  },
+  "errors": {
+    "fetching-details": "Could not fetch creator details. Please try again later."
+  }
+}

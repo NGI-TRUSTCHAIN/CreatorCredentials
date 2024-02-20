@@ -1,0 +1,9 @@
+{
+  "header": {
+    "title": "Creator verification",
+    "subtitle": "Elevate your online presence and credibility by using our suite of verification tools. Ensure your audience and collaborators recognize and trust your authenticity and attribution."
+  },
+  "errors": {
+    "fetching-credentials": "Something went wrong while fetching your credentials. Please try again later."
+  }
+}
