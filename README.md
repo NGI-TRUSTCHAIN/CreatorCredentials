@@ -32,8 +32,10 @@ You can read the documentation here: [https://docs.creatorcredentials.com](https
 
 ## Github
 
-The repositories can be found on the Creator Credentials Github: 
+The Github of the Creator Credentials project can be found here: 
 [https://github.com/CreatorCredentials](https://github.com/CreatorCredentials)
+
+(This repository keeps a copy of each repository.)
 
 ## Contact Information
 
