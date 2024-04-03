@@ -1,7 +1,8 @@
 export enum CredentialType {
-  Email = 'EMAIL',
+  EMail = 'EMAIL',
   Wallet = 'WALLET',
   Member = 'MEMBER',
+  Student = 'STUDENT',
   Domain = 'DOMAIN',
   DidWeb = 'DID_WEB',
 }

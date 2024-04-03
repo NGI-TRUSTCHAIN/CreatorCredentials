@@ -17,7 +17,7 @@
 ## Signature profile
 
 - Signature format: [JWS](https://hub.ebsi.eu/vc-framework/dades)
-- Signing algorithm: ES256 (P256 Elliptic Curve public keys)
+- Signing algorithm: ES256 (P256 Elliptic Curve public keys), RSA
 
 ## Verifiable Credentials Exchange profile
 

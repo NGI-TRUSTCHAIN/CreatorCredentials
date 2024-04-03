@@ -1,4 +1,5 @@
 import { useQuery, UseQueryOptions } from '@tanstack/react-query';
+import { useAuth } from '@clerk/nextjs';
 import { QueryKeys } from '@/api/queryKeys';
 import {
   getCredentialsRequestDetails,
@@ -11,11 +12,22 @@ export const useCredentialsRequestDetails = (
     UseQueryOptions<GetCredentialsRequestDetailsResponse>,
     'queryFn' | 'queryKey'
   >,
-) =>
-  useQuery<GetCredentialsRequestDetailsResponse>(
+) => {
+  const auth = useAuth();
+
+  return useQuery<GetCredentialsRequestDetailsResponse>(
     [QueryKeys.credentialsRequestDetails, creatorId],
-    () => getCredentialsRequestDetails(creatorId).then((res) => res.data),
+    async () => {
+      const token = await auth.getToken();
+      if (!token) {
+        throw new Error('Unauthorised useCredentialsRequestDetails call');
+      }
+      return getCredentialsRequestDetails(creatorId, token).then(
+        (res) => res.data,
+      );
+    },
     {
       ...options,
     },
   );
+};

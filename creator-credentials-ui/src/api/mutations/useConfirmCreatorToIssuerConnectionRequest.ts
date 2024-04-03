@@ -1,4 +1,5 @@
 import { useMutation, UseMutationOptions } from '@tanstack/react-query';
+import { useAuth } from '@clerk/nextjs';
 import { AxiosError } from '@/api/axiosNest';
 import {
   confirmCreatorToIssuerConnectionRequest,
@@ -15,13 +16,23 @@ export const useConfirmCreatorToIssuerConnectionRequest = (
     >,
     'mutationFn'
   >,
-) =>
-  useMutation({
-    mutationFn: ({
+) => {
+  const auth = useAuth();
+
+  return useMutation({
+    mutationFn: async ({
       issuerId,
-    }: ConfirmCreatorToIssuerConnectionRequestPayload) =>
-      confirmCreatorToIssuerConnectionRequest({ issuerId }).then(
+    }: ConfirmCreatorToIssuerConnectionRequestPayload) => {
+      const token = await auth.getToken();
+      if (!token) {
+        throw new Error(
+          'Unauthorised useConfirmCreatorToIssuerConnectionRequest call',
+        );
+      }
+      return confirmCreatorToIssuerConnectionRequest({ issuerId }, token).then(
         (res) => res.data,
-      ),
+      );
+    },
     ...options,
   });
+};

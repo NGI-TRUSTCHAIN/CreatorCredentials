@@ -24,10 +24,14 @@
     "typeorm:run-migrations": "npm run typeorm migration:run",
     "typeorm:generate-migration": "npm run typeorm -- migration:generate ./src/migrations/$npm_config_name",
     "typeorm:create-migration": "ts-node ./node_modules/typeorm/cli migration:create ./src/migrations/$npm_config_name",
-    "typeorm:revert-migration": "npm run typeorm -- migration:revert"
+    "typeorm:revert-migration": "npm run typeorm -- migration:revert",
+    "mig:gen": "./scripts/generate_migration.sh",
+    "mig:up": "./scripts/migration_up.sh",
+    "mig:down": "./scripts/migration_down.sh"
   },
   "dependencies": {
     "@clerk/clerk-sdk-node": "4.13.6",
+    "@nestjs/axios": "3.0.2",
     "@nestjs/common": "10.0.0",
     "@nestjs/config": "3.1.1",
     "@nestjs/core": "10.0.0",
@@ -39,7 +43,9 @@
     "class-transformer": "0.5.1",
     "cross-env": "7.0.3",
     "dotenv": "16.3.1",
+    "ethereumjs-util": "7.1.5",
     "jose": "5.2.0",
+    "keygen": "0.4.0",
     "pg": "8.11.3",
     "postgresql": "0.0.1",
     "reflect-metadata": "0.1.13",
@@ -56,6 +62,7 @@
     "@types/jest": "29.5.2",
     "@types/node": "20.3.1",
     "@types/supertest": "2.0.12",
+    "@types/uuid": "9.0.8",
     "@typescript-eslint/eslint-plugin": "6.0.0",
     "@typescript-eslint/parser": "6.0.0",
     "eslint": "8.42.0",

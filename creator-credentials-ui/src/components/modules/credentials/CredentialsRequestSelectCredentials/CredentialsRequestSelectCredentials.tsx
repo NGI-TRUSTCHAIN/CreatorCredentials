@@ -1,25 +1,24 @@
 import { Button } from 'flowbite-react';
 import { useCallback } from 'react';
 import { useTranslation } from '@/shared/utils/useTranslation';
-import { useRequestableCredentials } from '@/api/queries/useRequestableCredentials';
+// import { useRequestableCredentials } from '@/api/queries/useRequestableCredentials';
 import { ApiErrorMessage } from '@/components/shared/ApiErrorMessage';
-import { CredentialDetailsCard } from '@/components/shared/CredentialDetailsCard';
 import { FormFooter } from '@/components/shared/FormFooter';
 import { Loader } from '@/components/shared/Loader';
 import { PageHeader } from '@/components/shared/PageHeader';
 import { ColoredBadge } from '@/components/shared/ColoredBadge';
+import { CredentialTemplateDetailsCard } from '@/components/shared/CredentialTemplateDetailsCard';
+import { useCreatorsRequestableTemplates } from '@/api/queries/useCreatorsRequestableTemplates';
 import { useCredentialsRequestContext } from '../CredentialsRequestContext';
 import { CredentialsRequestStepper } from '../CredentialsRequestStepper';
 
 export const CredentialsRequestSelectCredentials = () => {
   const { t } = useTranslation('creator-credentials-request');
 
-  const { preSelectedIssuerId, stepper, credentials } =
-    useCredentialsRequestContext();
+  const { stepper, templates } = useCredentialsRequestContext();
 
-  const { data, isFetching, isLoading, status } = useRequestableCredentials(
-    preSelectedIssuerId ? preSelectedIssuerId : undefined,
-  );
+  const { data, isFetching, isLoading, status } =
+    useCreatorsRequestableTemplates();
 
   const renderContent = useCallback(() => {
     if (status === 'error') {
@@ -29,18 +28,18 @@ export const CredentialsRequestSelectCredentials = () => {
     if (isLoading || isFetching) {
       return <Loader />;
     }
-    const credentialsToRender = data.credentials.filter((c) => c.id === '3');
+    const templatesToRender = data.templates;
 
     return (
       <div className="mt-8">
         <div className="grid grid-cols-3 gap-4">
-          {credentialsToRender.map((credential) => (
-            <CredentialDetailsCard
-              key={credential.id}
+          {templatesToRender.map((template) => (
+            <CredentialTemplateDetailsCard
+              key={template.id}
               dropdownItems={[]}
-              credential={credential}
-              renderFooter={(credential) => {
-                const selected = credentials.isSelected(credential);
+              template={template}
+              renderFooter={() => {
+                const selected = templates.isSelected(template);
 
                 if (selected) {
                   return (
@@ -55,7 +54,7 @@ export const CredentialsRequestSelectCredentials = () => {
                   <Button
                     color="outline"
                     className="self-stretch"
-                    onClick={() => credentials.toggleSelection(credential)}
+                    onClick={() => templates.toggleSelection(template)}
                   >
                     {t(selected ? 'deselect' : 'select', { ns: 'common' })}
                   </Button>
@@ -66,7 +65,7 @@ export const CredentialsRequestSelectCredentials = () => {
         </div>
       </div>
     );
-  }, [credentials, data, isFetching, isLoading, status, t]);
+  }, [templates, data, isFetching, isLoading, status, t]);
 
   return (
     <>
@@ -83,7 +82,7 @@ export const CredentialsRequestSelectCredentials = () => {
         <FormFooter.NextButton
           onClick={stepper.nextStep}
           disabled={
-            credentials.selectedItems.length === 0 || isLoading || isFetching
+            templates.selectedItems.length === 0 || isLoading || isFetching
           }
         />
       </FormFooter>

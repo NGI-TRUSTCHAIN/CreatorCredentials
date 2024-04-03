@@ -24,14 +24,16 @@ export const IssuerDetailsCard = ({
       case IssuerConnectionStatus.Connected:
         return (
           <>
-            <Button
-              color="primary"
-              fullSized
-              href={`/creator/credentials/new?issuerId=${issuer.id}`}
-              as={Link as ElementType}
-            >
-              {t('issuer.request-button')}
-            </Button>
+            {issuer.id === '-1' ? null : (
+              <Button
+                color="primary"
+                fullSized
+                href={`/creator/credentials/new?issuerId=${issuer.id}`}
+                as={Link as ElementType}
+              >
+                {t('issuer.request-button')}
+              </Button>
+            )}
             <ColoredBadge
               badgeType="connected"
               className="self-center"
@@ -62,6 +64,7 @@ export const IssuerDetailsCard = ({
   return (
     <CardWithBadge
       badgeType="issuer"
+      additionalBadgeType={issuer.id === '-1' ? 'verification' : undefined}
       image={{
         imageUrl,
         alt: 'Issuer logo',

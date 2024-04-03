@@ -4,12 +4,13 @@ Creator Credentials software application that can be used by media organisations
 
 ## Table of Content
 
-- [Getting started (work in progress)](#getting-started-work-in-progress)
+- [Table of Content](#table-of-content)
+- [Getting started](#getting-started)
   - [Build](#build)
   - [Configure](#configure)
   - [Deploy](#deploy)
 - [Profile](#profile)
-- [Technical Specifications (work in progress)](#technical-specifications-work-in-progress)
+- [Technical Specifications](#technical-specifications)
   - [Host](#host)
   - [Issuer](#issuer)
   - [Creator](#creator)
@@ -17,7 +18,7 @@ Creator Credentials software application that can be used by media organisations
   - [Advanced topics](#advanced-topics)
 - [Reference](#reference)
 
-## Getting started (work in progress)
+## Getting started
 
 ### Build
 
@@ -35,17 +36,17 @@ _In this section, we summarise how to deploy the CreatorCredentials app._
 
 The Creator Credentials (CC) Verifiable Credentials (VC) profile follows the [EBSI](https://ebsi.eu) specifications. Details of the profile are defined [here](specs/profile.md).
 
-## Technical Specifications (work in progress)
+## Technical Specifications
 
 ### Host
 
-- How to set up and configure the CC app?: [specs/host-setup-config.md](specs/host-setup-config.md)
-- How to configure host's DID (did:web)?: [specs/host-did.md](specs/host-did.md)
-- How to authenticate the issuers?: [specs/host-issuer-authentication.md](specs/host-issuer-authentication.md)
+- How to set up and configure the CC app: [specs/host-setup-config.md](specs/host-setup-config.md)
+- How to configure host's DID (did:web): [specs/host-did.md](specs/host-did.md)
+- How to authenticate the issuers: [specs/host-issuer-authentication.md](specs/host-issuer-authentication.md)
 
 ### Issuer
 
-- How to configure and verify issuer's did:web? [specs/issuer-did.md](specs/issuer-did.md)
+- How to configure and verify issuer's did:web [specs/issuer-did.md](specs/issuer-did.md)
 
 ### Creator
 

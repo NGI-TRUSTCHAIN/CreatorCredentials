@@ -6,6 +6,7 @@ import { CardWithBadge } from '@/components/shared/CardWithBadge';
 import { CredentialVerificationStatus } from '@/shared/typings/CredentialVerificationStatus';
 import { ColoredBadge } from '@/components/shared/ColoredBadge';
 import { UserRole } from '@/shared/typings/UserRole';
+import { useDisconnectDomain } from '@/api/mutations/useDisconnectDomain';
 
 type DomainVerificationCardProps = {
   value?: string | null;
@@ -22,10 +23,12 @@ export const DomainVerificationCard = ({
 }: DomainVerificationCardProps) => {
   const { t } = useTranslation('verification-cards');
 
-  // TODO: Implement disconnect button handler after API is ready
-  const disconnectButtonHandler = () => {};
+  const { mutate } = useDisconnectDomain();
 
   const renderFooter = useCallback(() => {
+    const disconnectButtonHandler = () => {
+      mutate();
+    };
     switch (status) {
       case CredentialVerificationStatus.Success:
         return (
@@ -62,7 +65,7 @@ export const DomainVerificationCard = ({
           </Button>
         );
     }
-  }, [status, t, userRole]);
+  }, [status, t, userRole, mutate]);
 
   return (
     <CardWithBadge

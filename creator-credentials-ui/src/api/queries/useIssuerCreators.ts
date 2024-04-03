@@ -1,4 +1,5 @@
 import { useQuery, UseQueryOptions } from '@tanstack/react-query';
+import { useAuth } from '@clerk/nextjs';
 import { QueryKeys } from '@/api/queryKeys';
 import {
   getIssuerCreators,
@@ -16,11 +17,22 @@ export const useIssuerCreators = (
     UseQueryOptions<GetIssuerCreatorsResponse>,
     'queryFn' | 'queryKey'
   >,
-) =>
-  useQuery<GetIssuerCreatorsResponse>(
+) => {
+  const auth = useAuth();
+
+  return useQuery<GetIssuerCreatorsResponse>(
     [QueryKeys.issuerCreators, params],
-    () => getIssuerCreators(params).then((res) => res.data),
+    async () => {
+      const token = await auth.getToken();
+      if (!token) {
+        throw new Error('Unauthorised useIssuerCreators call');
+      }
+      return getIssuerCreators(params, token).then((res) => res.data);
+    },
     {
       ...options,
+      refetchInterval: 60000,
+      refetchOnMount: true,
     },
   );
+};

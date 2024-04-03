@@ -14,7 +14,7 @@ export const MetamaskConnectionButton = ({
   isLoadingVerifiedCredentials,
   walletAddress,
 }: Props) => {
-  const { connect, disconnect, isProcessing } = useMetaMask();
+  const { connect, disconnect, isProcessing } = useMetaMask({});
 
   const connectButtonHandler = async () => {
     await connect();

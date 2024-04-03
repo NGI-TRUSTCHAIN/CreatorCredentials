@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { useTranslation } from '@/shared/utils/useTranslation';
+// import { useTranslation } from '@/shared/utils/useTranslation';
 import { Issuer } from '@/shared/typings/Issuer';
 import { IssuerDetailsCard } from '@/components/shared/IssuerDetailsCard';
 
@@ -8,9 +8,9 @@ type AvailableIssuersProps = {
 };
 
 export const AvailableIssuers = ({ issuers }: AvailableIssuersProps) => {
-  const { t } = useTranslation('creator-issuers');
+  // const { t } = useTranslation('creator-issuers');
 
-  const { commonIssuers, additionalVerificationIssuers } = useMemo(
+  const { commonIssuers } = useMemo(
     () =>
       issuers.reduce<{
         commonIssuers: Issuer[];
@@ -45,7 +45,7 @@ export const AvailableIssuers = ({ issuers }: AvailableIssuersProps) => {
   return (
     <>
       <section>
-        <h3 className="my-4 text-lg">{t('list-of-available')}</h3>
+        {/* <h3 className="my-4 text-lg">{t('list-of-available')}</h3> */}
         <div className="grid grid-cols-3 gap-4">
           {commonIssuers.map((issuer) => (
             <IssuerDetailsCard
@@ -55,7 +55,7 @@ export const AvailableIssuers = ({ issuers }: AvailableIssuersProps) => {
           ))}
         </div>
       </section>
-      <section>
+      {/* <section>
         <h3 className="mb-4 mt-6 text-lg">{t('list-of-additional')}</h3>
         <div className="grid grid-cols-3 gap-4">
           {additionalVerificationIssuers.map((issuer) => (
@@ -65,7 +65,7 @@ export const AvailableIssuers = ({ issuers }: AvailableIssuersProps) => {
             />
           ))}
         </div>
-      </section>
+      </section> */}
     </>
   );
 };

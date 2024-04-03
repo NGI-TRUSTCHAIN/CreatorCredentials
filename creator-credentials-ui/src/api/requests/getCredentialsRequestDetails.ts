@@ -1,5 +1,6 @@
 import { VerifiedCredentialsUnion } from '@/shared/typings/Credentials';
 import { Creator } from '@/shared/typings/Creator';
+import { getHeaders } from '@/shared/utils/tokenHeader';
 import axios from '../axiosNest';
 
 export type GetCredentialsRequestDetailsResponse = {
@@ -7,7 +8,11 @@ export type GetCredentialsRequestDetailsResponse = {
   credentials: VerifiedCredentialsUnion[];
 };
 
-export const getCredentialsRequestDetails = (creatorId: string) =>
+export const getCredentialsRequestDetails = (
+  creatorId: string,
+  token: string,
+) =>
   axios.get<GetCredentialsRequestDetailsResponse>(
-    `/v1/mocks/issuer/creators/${creatorId}`,
+    `/v1/users/creators/${creatorId}`,
+    getHeaders(token),
   );

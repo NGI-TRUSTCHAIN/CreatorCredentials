@@ -6,7 +6,7 @@ import { ColoredBadge } from '@/components/shared/ColoredBadge';
 
 type EmailVerificationCardProps = {
   dropdownItems?: DropdownItemProps<ElementType>[];
-  email: string;
+  email?: string;
 };
 
 export const EmailVerificationCard = ({

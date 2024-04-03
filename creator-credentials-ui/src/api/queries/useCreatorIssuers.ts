@@ -1,14 +1,22 @@
 import { useQuery, UseQueryOptions } from '@tanstack/react-query';
-import { AxiosError } from '@/api/axiosNest';
+import { useAuth } from '@clerk/nextjs';
 import { QueryKeys } from '@/api/queryKeys';
-import { Issuer } from '@/shared/typings/Issuer';
-import { getCreatorIssuers } from '../requests/getCreatorIssuers';
+import { getIssuers, GetIssuersResponse } from '../requests/getIssuers';
 
 export const useCreatorIssuers = (
-  options?: Omit<UseQueryOptions<Issuer[], AxiosError>, 'queryFn'>,
-) =>
-  useQuery({
-    queryKey: [QueryKeys.creatorIssuers],
-    queryFn: () => getCreatorIssuers().then((res) => res.data.issuers),
-    ...options,
-  });
+  options?: Omit<UseQueryOptions<GetIssuersResponse>, 'queryFn' | 'queryKey'>,
+) => {
+  const auth = useAuth();
+
+  return useQuery<GetIssuersResponse>(
+    [QueryKeys.creatorIssuers],
+    async () => {
+      const token = await auth.getToken();
+      if (!token) {
+        throw new Error('Unauthorised useCreatorIssuers call');
+      }
+      return getIssuers(token).then((res) => res.data);
+    },
+    options,
+  );
+};

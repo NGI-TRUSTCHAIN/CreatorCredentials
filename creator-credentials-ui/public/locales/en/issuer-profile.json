@@ -4,6 +4,8 @@
     "description": "These are your basic profile settings."
   },
   "data": {
+    "templates": "My templates",
+    "organisation-wallet": "Organisation wallet",
     "title": "Your data",
     "fields": {
       "domain": {

@@ -1,9 +1,13 @@
 import React, { ElementType } from 'react';
-import { DropdownItemProps } from 'flowbite-react';
+import { DropdownItemProps, Tooltip } from 'flowbite-react';
 import { useTranslation } from '@/shared/utils/useTranslation';
 import { CredentialType } from '@/shared/typings/CredentialType';
 import { VerifiedCredentialsUnion } from '@/shared/typings/Credentials';
-import { truncateWalletAddress } from '@/shared/utils/truncateWalletAddress';
+import {
+  truncateWalletAddress,
+  truncateEmailAddress,
+} from '@/shared/utils/truncateWalletAddress';
+import { useCopyToClipboard } from '@/shared/hooks/useCopyToClipboard';
 import { CardWithBadge } from '../CardWithBadge';
 import { IconName } from '../Icon';
 
@@ -30,6 +34,19 @@ export const CredentialDetailsCard = ({
 }: CredentialDetailsCardProps) => {
   const { t } = useTranslation('cards');
   const { data, type } = credential;
+  const { copy } = useCopyToClipboard();
+
+  const address =
+    (type === CredentialType.Email || type === CredentialType.Wallet) &&
+    'address' in data
+      ? data.address
+      : undefined;
+
+  const addressClickHandler = () => {
+    if (address) {
+      copy(address);
+    }
+  };
 
   return (
     <CardWithBadge
@@ -44,20 +61,34 @@ export const CredentialDetailsCard = ({
           <p className="mb-2 text-base">
             {t(`credential.types.${type.toLowerCase()}.description`)}
           </p>
-          {type === CredentialType.Email && 'address' in data && (
-            <CardWithBadge.ContentWithIcon
-              iconName="Public"
-              className="whitespace-pre-wrap"
-            >
-              {data.address}
-            </CardWithBadge.ContentWithIcon>
-          )}
-          {type === CredentialType.Wallet && 'address' in data && (
+          {type === CredentialType.Email && 'address' in data && address ? (
+            <Tooltip content={address}>
+              <CardWithBadge.ContentWithIcon
+                iconName="Public"
+                className="whitespace-pre-wrap"
+                onClick={addressClickHandler}
+              >
+                {truncateEmailAddress(data.address)}
+              </CardWithBadge.ContentWithIcon>
+            </Tooltip>
+          ) : null}
+          {type === CredentialType.Wallet && 'address' in data && address ? (
+            <Tooltip content={address}>
+              <CardWithBadge.ContentWithIcon
+                iconName="AccountBalanceWallet"
+                className="whitespace-pre-wrap"
+                onClick={addressClickHandler}
+              >
+                {truncateWalletAddress(data.address)}
+              </CardWithBadge.ContentWithIcon>
+            </Tooltip>
+          ) : null}
+          {type === CredentialType.Domain && 'domain' in data && (
             <CardWithBadge.ContentWithIcon
               iconName="AccountBalanceWallet"
               className="whitespace-pre-wrap"
             >
-              {truncateWalletAddress(data.address)}
+              {data.domain}
             </CardWithBadge.ContentWithIcon>
           )}
           {'companyName' in data && data.companyName && (

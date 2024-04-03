@@ -44,7 +44,9 @@ const ContentWithIcon = ({
 
 type CardWithBadgeProps = {
   badgeType?: BadgeType;
+  additionalBadgeType?: BadgeType;
   title: string;
+  subtitle?: string;
   content: ReactNode;
   footer: ReactNode;
   className?: string | ClassValue;
@@ -62,7 +64,9 @@ const defaultDropdownItems = [] || [
 ];
 export const CardWithBadge = ({
   badgeType,
+  additionalBadgeType,
   title,
+  subtitle,
   content,
   footer,
   className,
@@ -74,10 +78,14 @@ export const CardWithBadge = ({
       <header className="flex flex-col gap-2">
         <div className="-mt-4 flex justify-between">
           {badgeType && (
-            <div className="-ms-4 self-start">
+            <div className="-ms-4 flex flex-row gap-2 self-start">
               <ColoredBadge badgeType={badgeType} />
+              {additionalBadgeType && (
+                <ColoredBadge badgeType={additionalBadgeType} />
+              )}
             </div>
           )}
+
           {dropdownItems.length > 0 ? (
             <div className="relative -me-4 h-6 w-6 self-end">
               <Dropdown
@@ -118,7 +126,8 @@ export const CardWithBadge = ({
               />
             )}
           </div>
-          <p className="text-xl text-black">{title}</p>
+          <p className="break-all text-xl text-black">{title}</p>
+          {subtitle && <p className="text-lg text-black">{subtitle}</p>}
         </div>
       </header>
       <div className="flex-1 overflow-hidden text-base text-grey-4">

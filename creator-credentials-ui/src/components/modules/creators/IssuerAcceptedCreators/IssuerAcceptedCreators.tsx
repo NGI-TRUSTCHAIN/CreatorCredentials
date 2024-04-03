@@ -13,7 +13,6 @@ export const IssuerAcceptedCreators = () => {
     {
       params: {
         status: CreatorVerificationStatus.Accepted,
-        search: '',
       },
     },
     // TODO: Decide whether we want to keep this functionality after removing MSW
@@ -37,8 +36,10 @@ export const IssuerAcceptedCreators = () => {
       <div className="grid grid-cols-3 gap-4">
         {data.creators.map((creator) => (
           <CreatorDetailsCard
+            subtitle={'Accepted connection'}
             key={creator.id}
             creator={creator}
+            backRoute="/issuer/creators/accepted"
           />
         ))}
       </div>

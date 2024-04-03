@@ -4,6 +4,8 @@ import { CredentialsService } from './credentials.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Credential } from './credential.entity';
 import { UsersModule } from 'src/users/users.module';
+import { Repository } from 'typeorm';
+import { User } from 'src/users/user.entity';
 
 @Module({
   imports: [

@@ -8,7 +8,7 @@ import {
 import { useStepper } from '@/shared/hooks/useStepper';
 import { IssuerWithVerifiedCredentials } from '@/shared/typings/Issuer';
 import { useSelect } from '@/shared/hooks/useSelect';
-import { VerifiedCredentialsUnion } from '@/shared/typings/Credentials';
+import { VerifiedCredentialsTemplate } from '@/shared/typings/Templates';
 import { CREDENTIALS_REQUEST_STEPS_TKEYS } from '../CredentialsRequestStepper';
 import { CredentialsRequestContextType } from './CredentialsRequestContext.types';
 
@@ -27,7 +27,7 @@ export const CredentialsRequestContextProvider = ({
   const stepper = useStepper({ steps: CREDENTIALS_REQUEST_STEPS_TKEYS });
   const [selectedIssuer, setSelectedIssuer] =
     useState<IssuerWithVerifiedCredentials | null>(null);
-  const credentials = useSelect<Omit<VerifiedCredentialsUnion, 'id'>>({
+  const templates = useSelect<Omit<VerifiedCredentialsTemplate, 'id'>>({
     singleSelection: true,
   });
 
@@ -45,14 +45,14 @@ export const CredentialsRequestContextProvider = ({
   const value = useMemo<CredentialsRequestContextType>(
     () => ({
       stepper,
-      credentials,
+      templates,
       preSelectedIssuerId,
       selectedIssuer,
       toggleIssuerSelection,
     }),
     [
       stepper,
-      credentials,
+      templates,
       preSelectedIssuerId,
       selectedIssuer,
       toggleIssuerSelection,

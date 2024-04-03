@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useRouter } from 'next/router';
 import { useQueryClient } from '@tanstack/react-query';
 import { useTranslation } from '@/shared/utils/useTranslation';
@@ -10,6 +10,8 @@ import { CredentialDetailsCard } from '@/components/shared/CredentialDetailsCard
 import { CreatorVerificationStatus } from '@/shared/typings/CreatorVerificationStatus';
 import { QueryKeys } from '@/api/queryKeys';
 import { GetCredentialsRequestDetailsResponse } from '@/api/requests/getCredentialsRequestDetails';
+import { downloadJson } from '@/shared/utils/downloadJson';
+import { CredentialType } from '@/shared/typings/CredentialType';
 import { CreatorCardAcceptRejectFooter } from '../CreatorCardAcceptRejectFooter';
 
 type CreatorCredentialsRequestDetailsProps = {
@@ -25,6 +27,16 @@ export const CreatorCredentialsRequestDetails = ({
 
   const { data, status, isLoading, isFetching } =
     useCredentialsRequestDetails(creatorId);
+
+  const filteredCredentials = useMemo(() => {
+    return data
+      ? data.credentials.filter(
+          (credential) =>
+            credential.type !== CredentialType.Member &&
+            credential.type !== CredentialType.DidWeb,
+        )
+      : [];
+  }, [data]);
 
   if (status === 'error') {
     return <ApiErrorMessage message={t('errors.fetching-details')} />;
@@ -75,13 +87,39 @@ export const CreatorCredentialsRequestDetails = ({
       </div>
       <h3 className="text-xl">{t('credentials.title')}</h3>
       <div className="grid grid-cols-3 gap-4">
-        {data.credentials.map((credential) => (
-          <CredentialDetailsCard
-            dropdownItems={[]}
-            key={credential.id}
-            credential={credential}
-          />
-        ))}
+        {filteredCredentials.map((credential) => {
+          let value = ''; //credentials.email.data.address;
+          const credentialObject = credential.data.credentialObject; //credentials.email.data.credentialObject;
+
+          switch (credential.type) {
+            case CredentialType.Email:
+              value = credential.data.address;
+              break;
+            case CredentialType.Wallet:
+              value = credential.data.address;
+              break;
+            case CredentialType.Domain:
+              value = credential.data.domain;
+              break;
+          }
+
+          return (
+            <CredentialDetailsCard
+              dropdownItems={[
+                {
+                  onClick: () =>
+                    downloadJson(
+                      `${value} ${credentialObject.validFrom}`,
+                      credentialObject,
+                    ),
+                  children: t('download', { ns: 'common' }),
+                },
+              ]}
+              key={credential.id}
+              credential={credential}
+            />
+          );
+        })}
       </div>
     </div>
   );

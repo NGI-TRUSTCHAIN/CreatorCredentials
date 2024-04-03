@@ -6,7 +6,6 @@ import { Creator } from '@/shared/typings/Creator';
 import { useAcceptCreatorConnectionRequest } from '@/api/mutations/useAcceptCreatorConnectionRequest';
 import { useRejectCreatorConnectionRequest } from '@/api/mutations/useRejectCreatorConnectionRequest';
 import { useToast } from '@/shared/hooks/useToast';
-import { GetIssuerCreatorsResponse } from '@/api/requests/getIssuerCreators';
 import { QueryKeys } from '@/api/queryKeys';
 import { CreatorVerificationStatus } from '@/shared/typings/CreatorVerificationStatus';
 
@@ -27,66 +26,21 @@ export const CreatorCardAcceptRejectFooter = ({
 
   const { mutateAsync: acceptAsync, isLoading: isAccepting } =
     useAcceptCreatorConnectionRequest({
-      onSuccess: (_, { creatorId }) => {
-        queryClient.setQueriesData<GetIssuerCreatorsResponse>(
-          [
-            QueryKeys.issuerCreators,
-            { status: CreatorVerificationStatus.Pending },
-          ],
-          (oldData) => {
-            if (!oldData) return;
-
-            const newData = oldData.creators.map((creator) =>
-              creator.id === creatorId
-                ? {
-                    ...creator,
-                    status: CreatorVerificationStatus.Accepted,
-                  }
-                : creator,
-            );
-
-            return {
-              creators: newData,
-            };
-          },
-        );
-
-        queryClient.setQueriesData<GetIssuerCreatorsResponse>(
-          [
-            QueryKeys.issuerCreators,
-            { status: CreatorVerificationStatus.Accepted },
-          ],
-          (oldData) => {
-            if (!oldData) return;
-
-            return {
-              creators: [creator, ...oldData.creators],
-            };
-          },
-        );
+      onSuccess: () => {
+        queryClient.invalidateQueries([
+          QueryKeys.issuerCreators,
+          { status: CreatorVerificationStatus.Pending },
+        ]);
       },
     });
 
   const { mutateAsync: rejectAsync, isLoading: isRejecting } =
     useRejectCreatorConnectionRequest({
-      onSuccess: (_, { creatorId }) => {
-        queryClient.setQueriesData<GetIssuerCreatorsResponse>(
-          [
-            QueryKeys.issuerCreators,
-            { status: CreatorVerificationStatus.Pending },
-          ],
-          (oldData) => {
-            if (!oldData) return;
-
-            const newData = oldData.creators.filter(
-              (creator) => creator.id !== creatorId,
-            );
-
-            return {
-              creators: newData,
-            };
-          },
-        );
+      onSuccess: () => {
+        queryClient.invalidateQueries([
+          QueryKeys.issuerCreators,
+          { status: CreatorVerificationStatus.Pending },
+        ]);
       },
     });
 

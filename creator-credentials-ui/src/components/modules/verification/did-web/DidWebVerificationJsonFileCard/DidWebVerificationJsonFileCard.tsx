@@ -4,13 +4,10 @@ import { useMemo } from 'react';
 import { useTranslation } from '@/shared/utils/useTranslation';
 import { useConfirmDidWebJsonFileUpload } from '@/api/mutations/useConfirmDidWebJsonFileUpload';
 import { QueryKeys } from '@/api/queryKeys';
-import { GetIssuerCredentialsResponse } from '@/api/requests/getIssuerCredentials';
 import { CardWithTitle } from '@/components/shared/CardWithTitle';
 import { Icon } from '@/components/shared/Icon';
 import { useDownloadStringToFile } from '@/shared/hooks/useDownloadStringToFile';
 import { useToast } from '@/shared/hooks/useToast';
-import { CredentialType } from '@/shared/typings/CredentialType';
-import { CredentialVerificationStatus } from '@/shared/typings/CredentialVerificationStatus';
 import { useDidWebVerificationContext } from '../DidWebVerificationContext';
 import { DidWebVerificationJsonFileStepsDescription } from './DidWebVerificationJsonFileStepsDescription';
 
@@ -19,35 +16,33 @@ export const DidWebVerificationJsonFileCard = () => {
   const toast = useToast();
   const { downloadFile } = useDownloadStringToFile();
   const queryClient = useQueryClient();
-  const { currentJsonFileContent, currentStep, domainAddress, setCurrentStep } =
+  const { currentJsonFileContent, currentStep, setCurrentStep } =
     useDidWebVerificationContext();
 
   const { mutateAsync, isLoading } = useConfirmDidWebJsonFileUpload({
     onSuccess: () => {
-      queryClient.setQueryData<GetIssuerCredentialsResponse>(
-        [QueryKeys.issuerCredentials],
-        (oldData) => {
-          if (!oldData) return;
+      queryClient.invalidateQueries([QueryKeys.issuerCredentials]);
+      // queryClient.setQueryData<GetIssuerCredentialsResponse>(
+      //   [QueryKeys.issuerCredentials],
+      //   (oldData) => {
+      //     if (!oldData) return;
 
-          const updatedData: GetIssuerCredentialsResponse = {
-            ...oldData,
-            credentials: {
-              ...oldData.credentials,
-              didWeb: {
-                ...oldData.credentials.didWeb,
-                id: 'temp-id', // TODO: remove this when we have real id
-                type: CredentialType.DidWeb,
-                data: {
-                  domain: domainAddress,
-                },
-                status: CredentialVerificationStatus.Pending,
-              },
-            },
-          };
+      //     const updatedData: GetIssuerCredentialsResponse = {
+      //       ...oldData,
+      //       didWeb: {
+      //         ...oldData.didWeb,
+      //         id: 'temp-id', // TODO: remove this when we have real id
+      //         type: CredentialType.DidWeb,
+      //         data: {
+      //           domain: domainAddress,
+      //         },
+      //         status: CredentialVerificationStatus.Pending,
+      //       },
+      //     };
 
-          return updatedData;
-        },
-      );
+      //     return updatedData;
+      //   },
+      // );
     },
   });
 

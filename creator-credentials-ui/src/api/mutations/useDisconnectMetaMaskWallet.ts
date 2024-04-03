@@ -1,4 +1,5 @@
 import { useMutation, UseMutationOptions } from '@tanstack/react-query';
+import { useAuth } from '@clerk/nextjs';
 import { AxiosError } from '@/api/axiosNest';
 import {
   disconnectMetaMaskWallet,
@@ -10,9 +11,18 @@ export const useDisconnectMetaMaskWallet = (
     UseMutationOptions<DisconnectMetaMaskWalletResponse, AxiosError, string>,
     'mutationFn'
   >,
-) =>
-  useMutation({
-    mutationFn: (walletAddress: string) =>
-      disconnectMetaMaskWallet(walletAddress).then((res) => res.data),
+) => {
+  const auth = useAuth();
+
+  return useMutation({
+    mutationFn: async () => {
+      const token = await auth.getToken();
+      if (!token) {
+        throw new Error('Unauthorised useDisconnectMetaMaskWallet call');
+      }
+
+      return disconnectMetaMaskWallet(token).then((res) => res.data);
+    },
     ...options,
   });
+};

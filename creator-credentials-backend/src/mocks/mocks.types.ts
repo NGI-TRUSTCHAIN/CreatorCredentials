@@ -31,10 +31,6 @@ export type GenerateMetaMaskNonceResponse = {
   nonce: string;
 };
 
-export type CreateTxtRecordForDomainResponse = {
-  txtRecord: string;
-};
-
 export type CreateDidWebJsonFileResponse = {
   jsonFileContent: string;
 };

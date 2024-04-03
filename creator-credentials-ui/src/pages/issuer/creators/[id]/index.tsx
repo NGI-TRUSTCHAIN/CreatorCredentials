@@ -8,7 +8,7 @@ import { NextPageWithLayout } from '@/shared/typings/NextPageWithLayout';
 import { UserRole } from '@/shared/typings/UserRole';
 import { getI18nProps } from '@/shared/utils/i18n';
 
-const IssuerCreatorDetailsPage: NextPageWithLayout = () => {
+const IssuerCreatorDetailsPage: NextPageWithLayout = ({ backRoute }) => {
   const { t } = useTranslation('issuer-creator-request-details');
 
   const {
@@ -19,7 +19,7 @@ const IssuerCreatorDetailsPage: NextPageWithLayout = () => {
     <>
       <PageHeader
         title={t('header.title')}
-        closeButtonHref="/issuer/creators/requested"
+        closeButtonHref={backRoute || '/issuer/creators/requested'}
       />
       <CreatorCredentialsRequestDetails creatorId={id as string} />
     </>
@@ -28,8 +28,11 @@ const IssuerCreatorDetailsPage: NextPageWithLayout = () => {
 
 export const getServerSideProps = withAuth(
   async (ctx) => {
+    const backRoute = ctx.query?.backRoute;
+
     return {
       props: {
+        backRoute: backRoute ? decodeURIComponent(backRoute as string) : null,
         ...(await getI18nProps(ctx.locale, [
           'issuer-creator-request-details',
           'cards',

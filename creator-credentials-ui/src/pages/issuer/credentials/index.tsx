@@ -1,39 +1,13 @@
-import { GetServerSideProps } from 'next';
-import { useTranslation } from '@/shared/utils/useTranslation';
-import { NextPageWithLayout } from '@/shared/typings/NextPageWithLayout';
-import { getI18nProps } from '@/shared/utils/i18n';
-import { withAuth } from '@/components/modules/app';
-import { UserRole } from '@/shared/typings/UserRole';
-import { PageHeader } from '@/components/shared/PageHeader';
-import { IssuerCredentialsList } from '@/components/modules/credentials/IssuerCredentialsList';
+import { GetServerSideProps, NextPage } from 'next';
 
-const IssuerCredentialsPage: NextPageWithLayout = () => {
-  const { t } = useTranslation('issuer-credentials');
+const IssuerCredentialsPage: NextPage = () => null;
 
-  return (
-    <>
-      <PageHeader
-        title={t('header.title')}
-        subtitle={t('header.description')}
-      />
-      <section>
-        <IssuerCredentialsList />
-      </section>
-    </>
-  );
-};
-
-export const getServerSideProps = withAuth(
-  async (ctx) => {
-    return {
-      props: {
-        ...(await getI18nProps(ctx.locale, ['issuer-credentials', 'cards'])),
-      },
-    };
+// eslint-disable-next-line require-await
+export const getServerSideProps = (async () => ({
+  redirect: {
+    destination: '/issuer/credentials/requested',
+    permanent: false,
   },
-  {
-    roles: [UserRole.Issuer],
-  },
-) satisfies GetServerSideProps;
+})) satisfies GetServerSideProps;
 
 export default IssuerCredentialsPage;

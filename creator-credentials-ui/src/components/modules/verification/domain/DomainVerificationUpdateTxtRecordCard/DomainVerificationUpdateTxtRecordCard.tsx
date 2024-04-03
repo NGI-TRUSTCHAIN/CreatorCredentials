@@ -4,15 +4,11 @@ import { useId } from 'react';
 import { useTranslation } from '@/shared/utils/useTranslation';
 import { useConfirmDomainTxtRecordCreation } from '@/api/mutations/useConfirmDomainTxtRecordCreation';
 import { QueryKeys } from '@/api/queryKeys';
-import { GetCreatorCredentialsResponse } from '@/api/requests/getCreatorCredentials';
-import { GetIssuerCredentialsResponse } from '@/api/requests/getIssuerCredentials';
 import { FormLabel } from '@/components/formFields/FormLabel';
 import { CardWithTitle } from '@/components/shared/CardWithTitle';
 import { IconButton } from '@/components/shared/IconButton/IconButton';
 import { useCopyToClipboard } from '@/shared/hooks/useCopyToClipboard';
 import { useToast } from '@/shared/hooks/useToast';
-import { CredentialType } from '@/shared/typings/CredentialType';
-import { CredentialVerificationStatus } from '@/shared/typings/CredentialVerificationStatus';
 import { useDomainVerificationContext } from '../DomainVerificationContext';
 
 export const DomainVerificationUpdateTxtRecordCard = () => {
@@ -21,54 +17,12 @@ export const DomainVerificationUpdateTxtRecordCard = () => {
   const fieldId = useId();
   const toast = useToast();
   const queryClient = useQueryClient();
-  const { txtRecord, currentStep, domainAddress, setCurrentStep } =
+  const { txtRecord, currentStep, setCurrentStep } =
     useDomainVerificationContext();
 
   const { mutateAsync, isLoading } = useConfirmDomainTxtRecordCreation({
     onSuccess: () => {
-      queryClient.setQueryData<GetCreatorCredentialsResponse>(
-        [QueryKeys.creatorVerifiedCredentials],
-        (oldData) => {
-          if (!oldData) return;
-
-          return {
-            ...oldData,
-            domain: {
-              id: 'temp-id', // TODO: remove this when we have real id
-              type: CredentialType.Domain,
-              data: {
-                domain: domainAddress,
-              },
-              ...oldData.domain,
-              status: CredentialVerificationStatus.Pending,
-            },
-          };
-        },
-      );
-
-      queryClient.setQueryData<GetIssuerCredentialsResponse>(
-        [QueryKeys.issuerCredentials],
-        (oldData) => {
-          if (!oldData) return;
-
-          return {
-            ...oldData,
-            credentials: {
-              ...oldData.credentials,
-              domain: {
-                ...oldData.credentials.domain,
-                id: 'temp-id', // TODO: remove this when we have real id
-                type: CredentialType.Domain,
-                data: {
-                  ...oldData.credentials.domain.data,
-                  domain: domainAddress,
-                },
-                status: CredentialVerificationStatus.Pending,
-              },
-            },
-          };
-        },
-      );
+      queryClient.invalidateQueries([QueryKeys.issuerCredentials]);
     },
   });
 

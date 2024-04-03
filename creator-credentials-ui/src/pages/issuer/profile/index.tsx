@@ -6,6 +6,8 @@ import { withAuth } from '@/components/modules/app';
 import { UserRole } from '@/shared/typings/UserRole';
 import { PageHeader } from '@/components/shared/PageHeader';
 import { IssuerProfileFormWrapper } from '@/components/modules/profile/issuer/IssuerProfileFormWrapper';
+import { IssuerCredentialsTemplatesList } from '@/components/modules/credentials/IssuerCredentialsTemplatesList';
+import { IssuerVerificationCards } from '@/components/modules/verification/IssuerVerificationCards';
 
 const IssuerProfilePage: NextPageWithLayout = () => {
   const { t } = useTranslation('issuer-profile');
@@ -17,7 +19,17 @@ const IssuerProfilePage: NextPageWithLayout = () => {
         subtitle={t('header.description')}
       />
       <section className="flex flex-col gap-10">
-        <IssuerProfileFormWrapper />
+        <section className="flex flex-col gap-4">
+          <h3 className="text-xl">{t('data.templates')}</h3>
+          <IssuerCredentialsTemplatesList />
+        </section>
+        <section className="flex flex-col gap-4">
+          <h3 className="text-xl">{t('data.organisation-wallet')}</h3>
+          <IssuerVerificationCards />
+        </section>
+        <section className="flex flex-col gap-4">
+          <IssuerProfileFormWrapper />
+        </section>
       </section>
     </>
   );

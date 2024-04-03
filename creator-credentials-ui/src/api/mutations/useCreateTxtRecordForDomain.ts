@@ -1,4 +1,5 @@
 import { useMutation, UseMutationOptions } from '@tanstack/react-query';
+import { useAuth } from '@clerk/nextjs';
 import { AxiosError } from '@/api/axiosNest';
 import {
   createTxtRecordForDomain,
@@ -10,9 +11,18 @@ export const useCreateTxtRecordForDomain = (
     UseMutationOptions<CreateTxtRecordForDomainResponse, AxiosError, string>,
     'mutationFn'
   >,
-) =>
-  useMutation({
-    mutationFn: (domain: string) =>
-      createTxtRecordForDomain(domain).then((res) => res.data),
+) => {
+  const auth = useAuth();
+
+  return useMutation({
+    mutationFn: async (domain: string) => {
+      const token = await auth.getToken();
+      if (!token) {
+        throw new Error('Unauthorised useCreateTxtRecordForDomain call');
+      }
+
+      return createTxtRecordForDomain(token, domain).then((res) => res.data);
+    },
     ...options,
   });
+};

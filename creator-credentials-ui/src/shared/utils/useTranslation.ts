@@ -92,11 +92,6 @@ function disabledUseTranslation(
     },
   };
 }
-// eslint-disable-next-line
-console.log(
-  'config.DISABLE_I18N_TRANSLATIONS: ',
-  config.DISABLE_I18N_TRANSLATIONS,
-);
 
 export const useTranslation = config.DISABLE_I18N_TRANSLATIONS
   ? disabledUseTranslation

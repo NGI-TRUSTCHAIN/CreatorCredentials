@@ -17,10 +17,26 @@ const issuersStatusFilter =
   (status: IssuerConnectionStatus) => (issuer: Issuer) =>
     issuer.status === status;
 
+// const CREATOR_CREDENTIALS_DEFAULT_ISSUER = {
+//   id: '-1',
+//   name: 'Creator Credentials B.V.',
+//   description: 'Based in the Netherlands',
+//   imageUrl: '/images/brand.svg',
+//   data: {
+//     domain: 'creatorcredentials.com',
+//     requirements: 'Info about requirements',
+//   },
+//   fees: false,
+//   status: IssuerConnectionStatus.Connected,
+//   vcs: [],
+// };
+
 const CreatorIssuersPage: NextPageWithLayout = () => {
   const { t } = useTranslation('creator-issuers');
 
-  const { data: issuers, isFetching } = useCreatorIssuers();
+  const { data: issuers, isFetching } = useCreatorIssuers({
+    refetchInterval: 60000,
+  });
 
   const { connected, pending, available } = useMemo(() => {
     const connected =
@@ -55,18 +71,24 @@ const CreatorIssuersPage: NextPageWithLayout = () => {
         />
       ) : (
         <TabsComponent style="underline">
-          <Tabs.Item
-            active
-            title={t('tabs.connected')}
-          >
-            <IssuersList issuers={connected} />
-          </Tabs.Item>
-          <Tabs.Item title={t('tabs.pending')}>
-            <IssuersList issuers={pending} />
-          </Tabs.Item>
-          <Tabs.Item title={t('tabs.available')}>
-            <AvailableIssuers issuers={available} />
-          </Tabs.Item>
+          {connected.length && (
+            <Tabs.Item
+              active
+              title={t('tabs.connected')}
+            >
+              <IssuersList issuers={connected} />
+            </Tabs.Item>
+          )}
+          {pending.length && (
+            <Tabs.Item title={t('tabs.pending')}>
+              <IssuersList issuers={pending} />
+            </Tabs.Item>
+          )}
+          {available.length && (
+            <Tabs.Item title={t('tabs.available')}>
+              <AvailableIssuers issuers={available} />
+            </Tabs.Item>
+          )}
         </TabsComponent>
       )}
     </>

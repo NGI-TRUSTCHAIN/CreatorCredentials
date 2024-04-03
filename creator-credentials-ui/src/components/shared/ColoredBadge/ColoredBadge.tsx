@@ -53,6 +53,12 @@ const BADGE_PROPS_MAP: Record<
       'fill-credential text-credential text-base gap-2 py-2 border border-transparent',
     iconClassName: 'h-5 w-5',
   },
+  template: {
+    tKey: 'badges.template',
+    iconName: 'Caption',
+    className: 'fill-primary text-primary bg-primary/10',
+    iconClassName: 'h-5 w-5',
+  },
   active: {
     tKey: 'active',
     iconName: 'CheckCircle',

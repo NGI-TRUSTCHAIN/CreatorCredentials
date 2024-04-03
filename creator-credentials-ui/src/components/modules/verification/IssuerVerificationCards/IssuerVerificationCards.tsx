@@ -1,10 +1,10 @@
 import React from 'react';
 import { useTranslation } from '@/shared/utils/useTranslation';
-import { useIssuerVerifications } from '@/api/queries/useIssuerVerifications';
 import { ApiErrorMessage } from '@/components/shared/ApiErrorMessage';
 import { Loader } from '@/components/shared/Loader';
 import { UserRole } from '@/shared/typings/UserRole';
 import { downloadJson } from '@/shared/utils/downloadJson';
+import { useIssuerCredentials } from '@/api/queries/useIssuerCredentials';
 import { DomainVerificationCard } from '../DomainVerificationCard';
 import { DidWebVerificationCard } from '../did-web/DidWebVerificationCard';
 import { EmailVerificationCard } from '../EmailVerificationCard';
@@ -15,7 +15,12 @@ export const IssuerVerificationCards = () => {
     useSuspense: false,
   });
 
-  const { data, isFetching, isLoading, status } = useIssuerVerifications({
+  const {
+    data: credentials,
+    isFetching,
+    isLoading,
+    status,
+  } = useIssuerCredentials({
     staleTime: 1000 * 60 * 1, // 1 minute
   });
 
@@ -26,31 +31,55 @@ export const IssuerVerificationCards = () => {
   if (isLoading || isFetching) {
     return <Loader />;
   }
+  const email = credentials.email.data.address;
+  const domain = credentials.domain?.data.domain;
+  const didWeb = credentials.didWeb?.data.domain;
+  const emailCredentialObject = credentials.email.data.credentialObject;
+  const domainCredentialObject = credentials.domain?.data.credentialObject;
+  const didWebCredentialObject = credentials.didWeb?.data.credentialObject;
   return (
     <section className="grid grid-cols-3 gap-4">
       <EmailVerificationCard
-        email={data.emailCredential.data.address}
+        email={email}
         dropdownItems={[
           {
             onClick: () =>
               downloadJson(
-                `${data.emailCredential.data.address} ${data.emailCredential.data.credentialObject.validFrom}`,
-                data.emailCredential.data.credentialObject,
+                `${email} ${emailCredentialObject.validFrom}`,
+                emailCredentialObject,
               ),
             children: t('download', { ns: 'common' }),
           },
         ]}
       />
       <DomainVerificationCard
-        value={data.credentials.domain?.data.domain}
-        status={data.credentials.domain?.status}
-        dropdownItems={[]}
+        value={credentials.domain?.data.domain}
+        status={credentials.domain?.status}
+        dropdownItems={[
+          {
+            onClick: () =>
+              downloadJson(
+                `${domain} ${domainCredentialObject.validFrom}`,
+                domainCredentialObject,
+              ),
+            children: t('download', { ns: 'common' }),
+          },
+        ]}
         userRole={UserRole.Issuer}
       />
       <DidWebVerificationCard
-        value={data.credentials.didWeb?.data.domain}
-        status={data.credentials.didWeb?.status}
-        dropdownItems={[]}
+        value={credentials.didWeb?.data.domain}
+        status={credentials.didWeb?.status}
+        dropdownItems={[
+          {
+            onClick: () =>
+              downloadJson(
+                `${didWeb} ${didWebCredentialObject.validFrom}`,
+                didWebCredentialObject,
+              ),
+            children: t('download', { ns: 'common' }),
+          },
+        ]}
         userRole={UserRole.Issuer}
       />
     </section>

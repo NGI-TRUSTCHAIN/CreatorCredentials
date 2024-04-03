@@ -1,9 +1,16 @@
 import { IssuerCredentials } from '@/shared/typings/Credentials';
-import axios from '../axiosNest';
+import { getHeaders } from '@/shared/utils/tokenHeader';
+import axios, { AxiosRequestConfig } from '../axiosNest';
 
-export type GetIssuerCredentialsResponse = {
-  credentials: IssuerCredentials;
-};
+export type GetIssuerCredentialsResponse = IssuerCredentials;
 
-export const getIssuerCredentials = () =>
-  axios.get<GetIssuerCredentialsResponse>('/v1/mocks/issuer/credentials');
+export const getIssuerCredentials = (
+  token: string,
+  config?: AxiosRequestConfig,
+) =>
+  axios
+    .get<GetIssuerCredentialsResponse>('/v1/credentials/issuer', {
+      ...config,
+      ...getHeaders(token),
+    })
+    .then((res) => res.data);

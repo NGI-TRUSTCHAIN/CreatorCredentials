@@ -17,6 +17,8 @@ import { ClerkExpressWithAuth, RequireAuthProp } from '@clerk/clerk-sdk-node';
 import { NextFunction } from 'express';
 import { CredentialsModule } from './credentials/credentials.module';
 import { MocksModule } from './mocks/mocks.module';
+import { ConnectionsModule } from './connections/connections.module';
+import { TemplatesModule } from './templates/templates.module';
 
 @Module({
   imports: [
@@ -37,6 +39,8 @@ import { MocksModule } from './mocks/mocks.module';
     UsersModule,
     CredentialsModule,
     MocksModule,
+    ConnectionsModule,
+    TemplatesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

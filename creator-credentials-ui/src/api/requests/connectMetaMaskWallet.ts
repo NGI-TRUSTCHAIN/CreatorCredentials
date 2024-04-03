@@ -1,21 +1,22 @@
+import { getHeaders } from '@/shared/utils/tokenHeader';
 import axios, { AxiosResponse } from '../axiosNest';
 
 export type ConnectMetaMaskWalletPayload = {
   signedMessage: string;
+  publicAddress: string;
 };
 
 export type ConnectMetaMaskWalletResponse = never;
 
 export type ConnectMetaMaskWalletProps = {
-  walletAddress: string;
   payload: ConnectMetaMaskWalletPayload;
 };
 
-export const connectMetaMaskWallet = ({
-  walletAddress,
-  payload,
-}: ConnectMetaMaskWalletProps) =>
+export const connectMetaMaskWallet = (
+  token: string,
+  { payload }: ConnectMetaMaskWalletProps,
+) =>
   axios.post<
     ConnectMetaMaskWalletPayload,
     AxiosResponse<ConnectMetaMaskWalletResponse, ConnectMetaMaskWalletPayload>
-  >(`/v1/mocks/users/${walletAddress}`, payload);
+  >(`/v1/users/address/connect`, payload, getHeaders(token));

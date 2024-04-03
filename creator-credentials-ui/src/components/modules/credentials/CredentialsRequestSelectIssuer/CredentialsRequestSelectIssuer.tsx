@@ -1,14 +1,14 @@
 import { Button } from 'flowbite-react';
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 import { useTranslation } from '@/shared/utils/useTranslation';
-import { useIssuersByCredentials } from '@/api/queries/useIssuersByCredentials';
 import { ApiErrorMessage } from '@/components/shared/ApiErrorMessage';
 import { FormFooter } from '@/components/shared/FormFooter';
 import { IssuerDetailsCard } from '@/components/shared/IssuerDetailsCard';
 import { Loader } from '@/components/shared/Loader';
 import { PageHeader } from '@/components/shared/PageHeader';
-import { CredentialType } from '@/shared/typings/CredentialType';
 import { ColoredBadge } from '@/components/shared/ColoredBadge';
+import { useGetIssuers } from '@/api/queries/useGetIssuers';
+import { IssuerConnectionStatus } from '@/shared/typings/IssuerConnectionStatus';
 import { useCredentialsRequestContext } from '../CredentialsRequestContext';
 import { CredentialsRequestStepper } from '../CredentialsRequestStepper';
 import { CredentialsRequestNoIssuersCard } from '../CredentialsRequestNoIssuersCard';
@@ -18,17 +18,22 @@ export const CredentialsRequestSelectIssuer = () => {
 
   const {
     selectedIssuer,
-    credentials,
     toggleIssuerSelection,
     preSelectedIssuerId,
     stepper,
   } = useCredentialsRequestContext();
 
-  const { data, isFetching, isLoading, status } = useIssuersByCredentials({
-    credentials: credentials.selectedItems.map(
-      (credential) => credential.type,
-    ) as CredentialType[],
-  });
+  const { data, isFetching, isLoading, status } = useGetIssuers({});
+  const { connected } = useMemo(() => {
+    const connected =
+      data?.filter(
+        (issuer) => issuer.status === IssuerConnectionStatus.Connected,
+      ) || [];
+
+    return {
+      connected,
+    };
+  }, [data]);
 
   const renderContent = useCallback(() => {
     if (status === 'error') {
@@ -39,11 +44,7 @@ export const CredentialsRequestSelectIssuer = () => {
       return <Loader />;
     }
 
-    const issuersToRender = (
-      preSelectedIssuerId
-        ? data.issuers.filter((issuer) => issuer.id === preSelectedIssuerId)
-        : data.issuers
-    ).filter((issuer) => issuer.id === '1');
+    const issuersToRender = connected;
 
     if (issuersToRender.length === 0) {
       return <CredentialsRequestNoIssuersCard />;
@@ -84,10 +85,9 @@ export const CredentialsRequestSelectIssuer = () => {
       </div>
     );
   }, [
-    data,
+    connected,
     isFetching,
     isLoading,
-    preSelectedIssuerId,
     selectedIssuer,
     status,
     t,

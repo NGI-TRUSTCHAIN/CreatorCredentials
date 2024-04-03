@@ -1,15 +1,19 @@
+import { getHeaders } from '@/shared/utils/tokenHeader';
 import axios, { AxiosResponse } from '../axiosNest';
 
 export type CreateDidWebJsonFilePayload = {
-  domain: string;
+  didWeb: string;
 };
 
 export type CreateDidWebJsonFileResponse = {
-  jsonFileContent: string;
+  wellKnownJsonString: string;
 };
 
-export const createDidWebJsonFile = (payload: CreateDidWebJsonFilePayload) =>
+export const createDidWebJsonFile = (
+  token: string,
+  payload: CreateDidWebJsonFilePayload,
+) =>
   axios.post<
     CreateDidWebJsonFilePayload,
     AxiosResponse<CreateDidWebJsonFileResponse, CreateDidWebJsonFilePayload>
-  >('/v1/mocks/verification/did-web/create-file', payload);
+  >('/v1/users/verification/did-web/well-known', payload, getHeaders(token));

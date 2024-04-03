@@ -5,27 +5,23 @@ import { useTranslation } from '@/shared/utils/useTranslation';
 import { useToast } from '@/shared/hooks/useToast';
 import { useConnectMetaMaskWallet } from '@/api/mutations/useConnectMetaMaskWallet';
 import { useDisconnectMetaMaskWallet } from '@/api/mutations/useDisconnectMetaMaskWallet';
-import { useGenerateMetaMaskNonce } from '@/api/mutations/useGenerateMetaMaskNonce';
+import { useGenerateMetaMaskNonce } from '@/api/queries/useGenerateMetaMaskNonce';
 import { QueryKeys } from '@/api/queryKeys';
 import { ProviderRpcError } from '@/shared/typings/ProviderRpcError';
 import { config } from '@/shared/constants/config';
-import { GetCreatorCredentialsResponse } from '@/api/requests/getCreatorCredentials';
-import { CredentialVerificationStatus } from '@/shared/typings/CredentialVerificationStatus';
-import { CredentialType } from '@/shared/typings/CredentialType';
 
 type UseMetaMaskProps = {
   optimisticUpdate?: boolean;
 };
 
-export const useMetaMask = ({
-  optimisticUpdate = true,
-}: UseMetaMaskProps = {}) => {
+export const useMetaMask = ({} // optimisticUpdate = true,
+: UseMetaMaskProps = {}) => {
   const { t } = useTranslation('metamask');
   const queryClient = useQueryClient();
   const toast = useToast();
 
   const [isConnecting, setIsConnecting] = useState(false);
-  const [account, setAccount] = useState<string>('');
+  // const [account, setAccount] = useState<string>('');
   const [sdk, setSDK] = useState<MetaMaskSDK>();
 
   const {
@@ -33,50 +29,19 @@ export const useMetaMask = ({
     isLoading: isConnectingMutationRunning,
   } = useConnectMetaMaskWallet({
     onSuccess: () => {
-      if (!optimisticUpdate || !account) return;
-
-      queryClient.setQueryData<GetCreatorCredentialsResponse>(
-        [QueryKeys.creatorVerifiedCredentials],
-        (oldData) => {
-          if (!oldData) return;
-
-          return {
-            ...oldData,
-            metaMask: {
-              id: account, // TODO: Replace after API implementation
-              type: CredentialType.Wallet,
-              data: {
-                address: account,
-              },
-              status: CredentialVerificationStatus.Success,
-            },
-          };
-        },
-      );
+      queryClient.invalidateQueries([QueryKeys.creatorVerifiedCredentials]);
     },
   });
 
   const { mutateAsync: mutateDisconnectWallet, isLoading: isDisconnecting } =
     useDisconnectMetaMaskWallet({
       onSuccess: () => {
-        if (!optimisticUpdate) return;
-
-        queryClient.setQueryData<GetCreatorCredentialsResponse>(
-          [QueryKeys.creatorVerifiedCredentials],
-          (oldData) => {
-            if (!oldData) return;
-
-            return {
-              ...oldData,
-              metaMask: null,
-            };
-          },
-        );
+        queryClient.invalidateQueries([QueryKeys.creatorVerifiedCredentials]);
       },
     });
 
-  const { mutateAsync: mutateMetaMaskNonce, isLoading: isLoadingNonce } =
-    useGenerateMetaMaskNonce();
+  const { data, isLoading: isLoadingNonce } = useGenerateMetaMaskNonce();
+  const nonce = data?.nonce;
 
   const connect = async () => {
     try {
@@ -92,7 +57,7 @@ export const useMetaMask = ({
       }
 
       const from = (accounts as string[])[0];
-      setAccount(from);
+      // setAccount(from);
 
       const provider = await sdk.getProvider();
 
@@ -100,19 +65,18 @@ export const useMetaMask = ({
         throw new Error('No provider');
       }
 
-      const { nonce } = await mutateMetaMaskNonce({ address: from });
-      if (nonce) {
+      if (!nonce) {
+        throw new Error('No nonce');
       }
+
+      const message = t('sign-message', {
+        nonce,
+        walletAddress: from,
+        termsAndConditionsUrl: config.TERMS_AND_CONDITIONS_URL,
+      });
       const signature = await provider?.request<string>({
         method: 'personal_sign',
-        params: [
-          t('sign-message', {
-            nonce,
-            walletAddress: from,
-            termsAndConditionsUrl: config.TERMS_AND_CONDITIONS_URL,
-          }),
-          from,
-        ],
+        params: [message, from],
       });
 
       if (!signature) {
@@ -120,8 +84,8 @@ export const useMetaMask = ({
       }
 
       await mutateConnectWallet({
-        walletAddress: from,
         payload: {
+          publicAddress: from,
           signedMessage: signature,
         },
       });

@@ -1,4 +1,5 @@
 import { GetServerSideProps } from 'next';
+import { getAuth } from '@clerk/nextjs/server';
 import { useTranslation } from '@/shared/utils/useTranslation';
 import { withAuth } from '@/components/modules/app';
 import { ConnectionRequestDetails } from '@/components/modules/issuers/ConnectionRequestDetails';
@@ -6,6 +7,10 @@ import { PageHeader } from '@/components/shared/PageHeader';
 import { NextPageWithLayout } from '@/shared/typings/NextPageWithLayout';
 import { UserRole } from '@/shared/typings/UserRole';
 import { getI18nProps } from '@/shared/utils/i18n';
+import { getHeaders } from '@/shared/utils/tokenHeader';
+import axiosSSRNest from '@/api/axiosSSRNest';
+import { IssuerConnectionStatus } from '@/shared/typings/IssuerConnectionStatus';
+import { Issuer } from '@/shared/typings/Issuer';
 
 type CreatorIssuersRequestPageProps = {
   issuerId: string;
@@ -37,6 +42,32 @@ export const getServerSideProps = withAuth(
       return {
         redirect: {
           destination: '/creator',
+          permanent: false,
+        },
+      };
+    }
+
+    const auth = getAuth(ctx.req);
+    const token = await auth.getToken();
+    if (!token) {
+      return {
+        redirect: {
+          destination: '/welcome',
+          permanent: false,
+        },
+      };
+    }
+    const { data }: { data: { issuer: Issuer } } = await axiosSSRNest.get(
+      `v1/users/issuers/${issuerId}`,
+      {
+        ...getHeaders(token),
+      },
+    );
+
+    if (data.issuer.status !== IssuerConnectionStatus.NotStarted) {
+      return {
+        redirect: {
+          destination: '/creator/issuers',
           permanent: false,
         },
       };

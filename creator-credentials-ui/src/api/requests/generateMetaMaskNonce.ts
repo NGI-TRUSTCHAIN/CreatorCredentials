@@ -1,15 +1,12 @@
-import axios, { AxiosResponse } from '../axiosNest';
-
-export type GenerateMetaMaskNoncePayload = {
-  address: string;
-};
+import { getHeaders } from '@/shared/utils/tokenHeader';
+import axios from '../axiosNest';
 
 export type GenerateMetaMaskNonceResponse = {
   nonce: string;
 };
 
-export const generateMetaMaskNonce = (payload: GenerateMetaMaskNoncePayload) =>
-  axios.post<
-    GenerateMetaMaskNoncePayload,
-    AxiosResponse<GenerateMetaMaskNonceResponse, GenerateMetaMaskNoncePayload>
-  >('/v1/mocks/users/nonce', payload);
+export const generateMetaMaskNonce = (token: string) =>
+  axios.get<GenerateMetaMaskNonceResponse>(
+    `/v1/users/nonce`,
+    getHeaders(token),
+  );

@@ -4,8 +4,7 @@
 .pnp.js
 
 # Environment variables
-.env*
-.env.dev
+.env.local
 
 # IDE
 .vscode/settings.json

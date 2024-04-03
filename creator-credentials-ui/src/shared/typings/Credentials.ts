@@ -34,6 +34,8 @@ export type DomainCredential = BaseCredential<
   CredentialType.Domain,
   {
     domain: string;
+    companyName?: string;
+    requirements?: string;
     // eslint-disable-next-line
     credentialObject?: any;
   }
@@ -54,6 +56,8 @@ export type DidWebCredential = BaseCredential<
   CredentialType.DidWeb,
   {
     domain: string;
+    companyName?: string;
+    requirements?: string;
     // eslint-disable-next-line
     credentialObject?: any;
   }
@@ -68,13 +72,14 @@ export type VerifiedCredentialsUnion =
 
 export type CreatorCredentials = {
   email: EmailCredential;
-  metaMask: WalletCredential | null;
+  wallet: WalletCredential | null;
   domain: DomainCredential | null;
   membership: MembershipCredential[];
 };
 
 export type IssuerCredentials = {
-  domain: DomainCredential;
-  didWeb: DidWebCredential;
+  email: EmailCredential;
+  domain: DomainCredential | null;
+  didWeb: DidWebCredential | null;
   membership: MembershipCredential[];
 };

@@ -31,9 +31,9 @@ export const DidWebVerificationEnterDomainCard = () => {
   > = async ({ domain }) => {
     try {
       setCurrentStep('domain');
-      const { jsonFileContent } = await mutateAsync({ domain });
+      const { wellKnownJsonString } = await mutateAsync({ didWeb: domain });
       setDomainAddress(domain);
-      setJsonFileContent(jsonFileContent);
+      setJsonFileContent(wellKnownJsonString);
     } catch (error) {
       toast.error(t('errors.json-file-creation'));
     }

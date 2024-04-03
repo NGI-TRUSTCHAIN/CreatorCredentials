@@ -1,4 +1,5 @@
 import { useMutation, UseMutationOptions } from '@tanstack/react-query';
+import { useAuth } from '@clerk/nextjs';
 import { AxiosError } from '@/api/axiosNest';
 import {
   sendCredentialsRequest,
@@ -15,9 +16,17 @@ export const useSendCredentialsRequest = (
     >,
     'mutationFn'
   >,
-) =>
-  useMutation({
-    mutationFn: (payload: SendCredentialsRequestPayload) =>
-      sendCredentialsRequest(payload).then((res) => res.data),
+) => {
+  const auth = useAuth();
+
+  return useMutation({
+    mutationFn: async (payload: SendCredentialsRequestPayload) => {
+      const token = await auth.getToken();
+      if (!token) {
+        throw new Error('Unauthorised useSendCredentialsRequest call');
+      }
+      return sendCredentialsRequest(payload, token).then((res) => res.data);
+    },
     ...options,
   });
+};

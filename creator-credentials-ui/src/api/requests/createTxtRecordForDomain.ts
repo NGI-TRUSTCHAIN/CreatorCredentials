@@ -1,3 +1,4 @@
+import { getHeaders } from '@/shared/utils/tokenHeader';
 import axios, { AxiosResponse } from '../axiosNest';
 
 export type CreateTxtRecordForDomainPayload = {
@@ -8,11 +9,11 @@ export type CreateTxtRecordForDomainResponse = {
   txtRecord: string;
 };
 
-export const createTxtRecordForDomain = (domain: string) =>
+export const createTxtRecordForDomain = (token: string, domain: string) =>
   axios.post<
     CreateTxtRecordForDomainPayload,
     AxiosResponse<
       CreateTxtRecordForDomainResponse,
       CreateTxtRecordForDomainPayload
     >
-  >('/v1/mocks/verification/domain/txt-record', { domain });
+  >('/v1/users/verification/domain/txt-record', { domain }, getHeaders(token));

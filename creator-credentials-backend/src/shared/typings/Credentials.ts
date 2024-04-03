@@ -9,7 +9,7 @@ type BaseCredential<T extends CredentialType, D extends object> = {
 };
 
 export type EmailCredential = BaseCredential<
-  CredentialType.Email,
+  CredentialType.EMail,
   {
     address: string;
     requirements?: string;
@@ -34,6 +34,8 @@ export type DomainCredential = BaseCredential<
   CredentialType.Domain,
   {
     domain: string;
+    companyName?: string;
+    requirements?: string;
     // eslint-disable-next-line
     credentialObject?: any;
   }
@@ -54,6 +56,8 @@ export type DidWebCredential = BaseCredential<
   CredentialType.DidWeb,
   {
     domain: string;
+    companyName?: string;
+    requirements?: string;
     // eslint-disable-next-line
     credentialObject?: any;
   }

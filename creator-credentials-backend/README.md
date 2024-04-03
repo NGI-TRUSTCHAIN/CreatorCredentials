@@ -6,6 +6,12 @@ CREATOR_CREDENTIAL_BACKEND
 $ pnpm install
 ```
 
+## Running the app in a docker image:
+```
+docker compose up # dev
+# or
+docker compose up -f docker-compose-prod.yml (prod)
+```
 ## Running the app
 
 ```bash
