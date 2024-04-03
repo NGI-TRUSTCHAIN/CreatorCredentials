@@ -6,13 +6,13 @@
 
 Creator Credentials will introduce decentralised digital identities to the cultural and creative industries. Why? Because we see many use cases for VCs and DIDs in the media industries that can help to significantly enhance the trustworthiness of online media environments.
 
-The abundance and widespread dissemination of media content online poses significant challenges for users in terms of analysing and verifying the data integrity, authenticity, claims and attribution to the content. This lack of transparency creates an environment that fosters the spread of fake news and disinformation campaigns.&#x20;
+The abundance of AI generated content and the widespread dissemination of media content online poses significant challenges for users in terms of analysing and verifying the sources, data integrity, authenticity, claims and attribution to the content. This lack of transparency creates an environment that fosters the spread of fake news and disinformation campaigns.
 
-Proper attribution, using tools and services based on the concept of self-sovereign identity (SSI), can potentially improve the situation. However, the concepts of SSI are mostly unknown to the creative communities. SSI tools and protocols are not easy to use, and the barriers of entry are simply too high to get the media sector interested and involved.
+Proper attribution using tools and services based on the concept of self-sovereign identity (SSI) can potentially improve the situation. However, the concepts of SSI are largely unknown to the creative communities. SSI tools and protocols are not easy to use, and the barriers of entry are simply too high to to generate interest and participation from the media sector.
 
 ## Project Goals
 
-The Creator Credentials project will develop a user-centric digital identity management framework that is specifically designed to serve the unique needs of the cultural and creative industries.&#x20;
+The Creator Credentials project will develop a user-centric digital identity management framework that is specifically designed to serve the unique needs of the cultural and creative industries.
 
 This includes a software application that can be used by media organisations, membership organisations or other trust services to manage and issue verifiable credentials to creators and other rightsholders. Creator Credentials will increase the trustworthiness of declarations and claims to digital media content online.
 
@@ -20,7 +20,7 @@ Creator Credentials aims to establish a new role for public entities and organis
 
 ## Documentation
 
-You can read the documentation here: [https://docs.creatorcredentials.com](https://docs.creatorcredentials.com)
+You can find the documentation here: [https://docs.creatorcredentials.com](https://docs.creatorcredentials.com)
 
 ## Overview
 
